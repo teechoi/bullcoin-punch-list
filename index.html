@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 18 findings, a hero mockup, and the on-canon art to swap in.">
+<link rel="icon" type="image/png" href="img/canon-model-cut.png">
+<title>Bullcoin Site Punch List</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Baloo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #F2F1E6;
+    --surface: #FBFAF2;
+    --surface-2: #E9E8DA;
+    --ink: #15170E;
+    --ink-2: #4B5140;
+    --ink-3: #7C826D;
+    --rule: #D9D8C7;
+    --rule-hard: #15170E;
+    --lime: #C4F03C;
+    --lime-ink: #15170E;
+    --lime-deep: #7E9E1C;
+    --blocker: #B33418;
+    --blocker-soft: #F6E2DC;
+    --major: #A8700A;
+    --major-soft: #F6ECD6;
+    --polish: #566647;
+    --polish-soft: #E7EADD;
+    --ok: #3F7A34;
+    --shadow: 0 2px 0 rgba(21,23,14,.14);
+    --step--1: .78rem;
+    --step-0: .975rem;
+    --step-1: 1.16rem;
+    --step-2: 1.5rem;
+    --step-3: 2.1rem;
+    --step-4: 3.1rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #12140D;
+      --surface: #1A1D13;
+      --surface-2: #23271A;
+      --ink: #F0EFE2;
+      --ink-2: #B3B8A2;
+      --ink-3: #878D76;
+      --rule: #2E3322;
+      --rule-hard: #4A5237;
+      --blocker: #F2836B;
+      --blocker-soft: #3A1D15;
+      --major: #E8B155;
+      --major-soft: #3A2C11;
+      --polish: #A6B78C;
+      --polish-soft: #232A1B;
+      --ok: #8CC77E;
+      --shadow: 0 2px 0 rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12140D;
+    --surface: #1A1D13;
+    --surface-2: #23271A;
+    --ink: #F0EFE2;
+    --ink-2: #B3B8A2;
+    --ink-3: #878D76;
+    --rule: #2E3322;
+    --rule-hard: #4A5237;
+    --blocker: #F2836B;
+    --blocker-soft: #3A1D15;
+    --major: #E8B155;
+    --major-soft: #3A2C11;
+    --polish: #A6B78C;
+    --polish-soft: #232A1B;
+    --ok: #8CC77E;
+    --shadow: 0 2px 0 rgba(0,0,0,.5);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+    font-size: var(--step-0);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    border-bottom: 2px solid var(--rule-hard);
+    background: var(--lime);
+    color: var(--lime-ink);
+    padding: 2.6rem 0 1.9rem;
+  }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .masthead h1 {
+    font-family: Shrikhand, Georgia, serif;
+    font-weight: 400;
+    font-size: var(--step-4);
+    line-height: .98;
+    margin: .5rem 0 .7rem;
+    text-wrap: balance;
+    letter-spacing: -.01em;
+  }
+  .standfirst {
+    margin: 0;
+    max-width: 34rem;
+    font-size: var(--step-1);
+    font-weight: 500;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: .1rem 1.4rem;
+    margin-top: 1.7rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(21,23,14,.28);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+  }
+  .facts dt { color: rgba(21,23,14,.62); text-transform: uppercase; letter-spacing: .07em; }
+  .facts dd { margin: .15rem 0 .8rem; font-weight: 600; word-break: break-word; }
+
+  /* ---------- status bar ---------- */
+  .statusbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 1px 0 var(--rule);
+  }
+  .statusbar-in {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .55rem 1.1rem;
+    padding: .7rem 1.5rem;
+    max-width: 62rem;
+    margin: 0 auto;
+  }
+  .tally {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .meter {
+    width: 5.5rem; height: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .meter i { display: block; height: 100%; width: 0; background: var(--lime-deep); transition: width .25s ease; }
+  .filters { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .filters button {
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: .28rem .7rem;
+    cursor: pointer;
+  }
+  .filters button:hover { border-color: var(--ink-3); color: var(--ink); }
+  .filters button[aria-pressed="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--ground);
+  }
+  :focus-visible { outline: 2px solid var(--lime-deep); outline-offset: 2px; }
+
+  /* ---------- areas ---------- */
+  main { padding: 2.6rem 0 4rem; }
+  .area { margin-bottom: 3.1rem; }
+  .area-head {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--rule-hard);
+    margin-bottom: .2rem;
+  }
+  .area-head h2 {
+    font-family: Shrikhand, Georgia, serif;
+    font-weight: 400;
+    font-size: var(--step-2);
+    margin: 0;
+    line-height: 1.1;
+  }
+  .area-head .anchor {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    color: var(--ink-3);
+    margin-left: auto;
+  }
+
+  /* ---------- item rows ---------- */
+  .item {
+    display: grid;
+    grid-template-columns: 4px 1.6rem 1fr;
+    gap: 0 .8rem;
+    padding: 1.15rem 0 1.25rem;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .item.is-hidden { display: none; }
+  .bar { align-self: stretch; background: var(--polish); }
+  .item[data-sev="blocker"] .bar { background: var(--blocker); }
+  .item[data-sev="major"] .bar { background: var(--major); }
+
+  .check { position: relative; display: block; margin-top: .18rem; }
+  .check input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .check .box {
+    display: block; width: 1.15rem; height: 1.15rem;
+    border: 2px solid var(--ink-3);
+    background: var(--surface);
+    pointer-events: none;
+  }
+  .check input:checked + .box {
+    background: var(--lime-deep);
+    border-color: var(--lime-deep);
+    background-image: linear-gradient(45deg, transparent 44%, var(--surface) 44%, var(--surface) 56%, transparent 56%),
+                      linear-gradient(-45deg, transparent 44%, var(--surface) 44%, var(--surface) 56%, transparent 56%);
+  }
+  .check input:focus-visible + .box { outline: 2px solid var(--lime-deep); outline-offset: 2px; }
+  .item.done .body h3 { text-decoration: line-through; text-decoration-thickness: 1px; }
+  .item.done { opacity: .5; }
+
+  .top { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; margin-bottom: .3rem; }
+  .sev, .ref {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .69rem;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    padding: .1rem .45rem;
+  }
+  .sev { color: var(--polish); background: var(--polish-soft); }
+  .item[data-sev="blocker"] .sev { color: var(--blocker); background: var(--blocker-soft); }
+  .item[data-sev="major"] .sev { color: var(--major); background: var(--major-soft); }
+  .ref { color: var(--ink-3); background: transparent; padding-left: 0; }
+
+  .body h3 {
+    font-size: var(--step-1);
+    font-weight: 700;
+    margin: 0 0 .35rem;
+    line-height: 1.28;
+    text-wrap: balance;
+  }
+  .body p { margin: 0 0 .5rem; max-width: 40rem; color: var(--ink-2); }
+  .body p:last-child { margin-bottom: 0; }
+  .fix {
+    border-left: 3px solid var(--lime);
+    padding-left: .7rem;
+    color: var(--ink) !important;
+  }
+  .fix b {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--lime-deep);
+    display: block;
+  }
+  code, .ev {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .8rem;
+  }
+  code { background: var(--surface-2); padding: .05rem .3rem; border-radius: 2px; word-break: break-word; }
+  .ev {
+    margin: .55rem 0 0;
+    padding: .55rem .7rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+    overflow-x: auto;
+    line-height: 1.5;
+    white-space: pre;
+  }
+
+  /* ---------- mapping table ---------- */
+  .tablewrap { overflow-x: auto; margin: .6rem 0 0; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .82rem; }
+  th, td { text-align: left; padding: .42rem .7rem; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  th { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  tbody td:first-child { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  tr:last-child td { border-bottom: 0; }
+  td.bad { color: var(--blocker); font-weight: 600; }
+
+  /* ---------- assets ---------- */
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--lime);
+    padding: 1rem 1.1rem;
+    margin: 1.2rem 0 1.8rem;
+  }
+  .note p { margin: 0 0 .5rem; color: var(--ink-2); max-width: 42rem; }
+  .note p:last-child { margin: 0; }
+  .note strong { color: var(--ink); }
+
+  .canon { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.3rem; align-items: center; margin: 1.4rem 0 2.2rem; }
+  .canon img { width: 100%; display: block; background: #000; border: 2px solid var(--rule-hard); }
+  .canon h3 { font-family: Shrikhand, Georgia, serif; font-weight: 400; font-size: var(--step-1); margin: 0 0 .4rem; }
+  .canon p { margin: 0; color: var(--ink-2); max-width: 34rem; }
+
+  .group { margin-bottom: 2.2rem; }
+  .group-head { display: flex; align-items: baseline; gap: .7rem; margin-bottom: .8rem; }
+  .group-head h3 {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--ink);
+    background: var(--lime);
+    padding: .18rem .5rem;
+  }
+  .group-head p { margin: 0; color: var(--ink-3); font-size: var(--step--1); }
+  .shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .9rem; }
+  figure { margin: 0; }
+  figure img {
+    width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+    border: 2px solid var(--rule-hard);
+    background: var(--surface-2);
+  }
+  figcaption {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .69rem;
+    line-height: 1.45;
+    margin-top: .35rem;
+    color: var(--ink-3);
+    word-break: break-word;
+  }
+  figcaption b { display: block; color: var(--ink); font-weight: 600; }
+
+  /* ---------- mockups (single-theme: this is the brand's own world) ---------- */
+  .mocks { display: grid; gap: 1.6rem; margin: 1.5rem 0 0; }
+  .mockframe { border: 2px solid var(--rule-hard); background: #EEEDE2; position: relative; }
+  .mocktag {
+    position: absolute; top: 0; left: 0; z-index: 3;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .66rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    background: #15170E; color: #C4F03C; padding: .22rem .55rem;
+  }
+
+  /* hero mock */
+  .mock-hero {
+    background-color: #C9F73B;
+    background-image: radial-gradient(rgba(21,23,14,.20) 1px, transparent 1px);
+    background-size: 17px 17px;
+    color: #15170E;
+    padding: clamp(1.6rem, 4vw, 2.9rem) clamp(1.1rem, 3.4vw, 2.4rem) clamp(1.4rem, 3.4vw, 2.4rem);
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: clamp(1rem, 3vw, 2.2rem);
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mock-nav {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 1.1rem;
+    padding-bottom: .9rem; margin-bottom: .2rem;
+    border-bottom: 2px solid #15170E;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .66rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .mock-wordmark { font-family: Shrikhand, Georgia, serif; font-size: 1.05rem; letter-spacing: 0; text-transform: none; font-weight: 400; }
+  .mock-nav span.on { border-bottom: 2px solid #15170E; padding-bottom: .12rem; }
+  .mock-nav .spacer { margin-left: auto; }
+  .mock-nav .cta { background: #15170E; color: #C9F73B; padding: .34rem .7rem; border-radius: 999px; }
+
+  .mock-kicker {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .63rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    background: #EEEDE2; border: 2px solid #15170E; border-radius: 999px;
+    padding: .2rem .6rem; margin-bottom: .5rem;
+  }
+  .mock-title {
+    font-family: Shrikhand, Georgia, serif; font-weight: 400;
+    font-size: clamp(2.4rem, 8.5vw, 4.4rem);
+    line-height: .88; margin: 0 0 .55rem;
+    color: #EEEDE2;
+    text-shadow: 3px 3px 0 #15170E;
+    letter-spacing: .01em;
+  }
+  .mock-sub { margin: 0 0 1rem; font-weight: 500; max-width: 22rem; font-size: .93rem; }
+  .mock-btns { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+  .mock-btn {
+    font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: .82rem;
+    letter-spacing: .04em; text-transform: uppercase;
+    padding: .55rem 1.05rem; border: 2px solid #15170E; border-radius: 999px;
+  }
+  .mock-btn.solid { background: #15170E; color: #C9F73B; box-shadow: 3px 3px 0 rgba(21,23,14,.35); }
+  .mock-btn.ghost { background: #EEEDE2; color: #15170E; }
+  .mock-secondary {
+    display: block; margin-top: .6rem;
+    font-size: .76rem; font-weight: 600;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .mock-pill {
+    display: inline-flex; align-items: center; gap: .5rem; margin-top: .9rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .7rem; font-weight: 600;
+    background: #EEEDE2; border: 2px solid #15170E; border-radius: 999px; padding: .26rem .3rem .26rem .65rem;
+  }
+  .mock-pill i { background: #15170E; color: #C9F73B; border-radius: 999px; padding: .12rem .45rem; font-style: normal; font-size: .62rem; }
+  .mock-art { border: 3px solid #15170E; box-shadow: 7px 7px 0 rgba(21,23,14,.3); background: #15170E; position: relative; }
+
+  /* hero art cycles the community set so the versatility reads at a glance */
+  .flip { position: relative; aspect-ratio: 1; overflow: hidden; }
+  .flip img {
+    position: absolute; inset: 0;
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0;
+    animation: flipframe 10.2s linear infinite;
+  }
+  .flip img:nth-child(1) { animation-delay: 0s; }
+  .flip img:nth-child(2) { animation-delay: 1.7s; }
+  .flip img:nth-child(3) { animation-delay: 3.4s; }
+  .flip img:nth-child(4) { animation-delay: 5.1s; }
+  .flip img:nth-child(5) { animation-delay: 6.8s; }
+  .flip img:nth-child(6) { animation-delay: 8.5s; }
+  @keyframes flipframe {
+    0%, 14.5%  { opacity: 1; }
+    16.6%, 98% { opacity: 0; }
+    100%       { opacity: 1; }
+  }
+  .flip-label {
+    position: absolute; bottom: 0; left: 0; z-index: 2;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .6rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase;
+    background: #15170E; color: #C9F73B; padding: .2rem .5rem;
+  }
+  .mock-sticker {
+    position: absolute;
+    font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: .68rem;
+    background: #EEEDE2; border: 2px solid #15170E; border-radius: 8px;
+    padding: .2rem .5rem; box-shadow: 2px 2px 0 #15170E;
+  }
+  .mock-sticker.s2 { bottom: .9rem; left: 1rem; transform: rotate(-5deg); }
+
+  .mock-marquee {
+    background: #15170E; color: #EEEDE2; overflow: hidden;
+    border-top: 2px solid #15170E;
+    font-family: Shrikhand, Georgia, serif; font-size: .95rem;
+    padding: .45rem 0; white-space: nowrap;
+  }
+  .mock-marquee span { display: inline-block; padding-right: 1.4rem; }
+  .mock-marquee b { color: #C9F73B; font-weight: 400; }
+
+  /* annotations */
+  .annot { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .5rem; }
+  .annot li { display: grid; grid-template-columns: 1.5rem 1fr; gap: .6rem; align-items: start; color: var(--ink-2); font-size: .89rem; }
+  .annot b {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .62rem; font-weight: 600;
+    background: var(--lime); color: var(--lime-ink); border-radius: 999px;
+    text-align: center; padding: .18rem 0; letter-spacing: .04em;
+  }
+
+  /* share card mock */
+  .mock-card { background: #15170E; padding: clamp(.9rem, 2.6vw, 1.5rem); }
+  .xcard { max-width: 30rem; margin: 0 auto; background: #EEEDE2; border: 2px solid #C9F73B; overflow: hidden; }
+  .xcard-img {
+    aspect-ratio: 1200 / 630;
+    background-color: #C9F73B;
+    background-image: radial-gradient(rgba(21,23,14,.2) 1px, transparent 1px);
+    background-size: 14px 14px;
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .8rem;
+    padding: 0 clamp(.8rem, 3vw, 1.5rem);
+    border-bottom: 2px solid #15170E;
+  }
+  .xcard-img h4 {
+    font-family: Shrikhand, Georgia, serif; font-weight: 400; margin: 0;
+    font-size: clamp(1.3rem, 5.5vw, 2.3rem); line-height: .9;
+    color: #EEEDE2; text-shadow: 2px 2px 0 #15170E;
+  }
+  .xcard-img p {
+    margin: .35rem 0 0; font-size: clamp(.6rem, 1.9vw, .78rem); font-weight: 600; color: #15170E;
+  }
+  .xcard-img img {
+    width: clamp(4rem, 20%, 7rem);
+    display: block;
+    align-self: end;
+    filter: drop-shadow(4px 4px 0 rgba(21,23,14,.32));
+  }
+  .xcard-meta { padding: .55rem .8rem; font-size: .74rem; color: #4B5140; font-family: "JetBrains Mono", ui-monospace, monospace; }
+  .xcard-meta b { display: block; color: #15170E; font-size: .8rem; margin-bottom: .1rem; }
+
+  /* before / after tiles */
+  .ba { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .9rem; margin-top: 1rem; }
+  .ba-tile { background: #15170E; border: 2px solid #15170E; padding: 1rem 1.1rem; }
+  .ba-tile .lab {
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .62rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: .5rem;
+  }
+  .ba-tile .num { font-family: Shrikhand, Georgia, serif; font-size: 1.85rem; line-height: 1; font-weight: 400; }
+  .ba-tile .cap { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; margin-top: .45rem; }
+  .ba-now .lab { color: #F2836B; } .ba-now .num { color: #F2836B; } .ba-now .cap { color: #9AA087; }
+  .ba-next .lab { color: #C9F73B; } .ba-next .num { color: #C9F73B; } .ba-next .cap { color: #9AA087; }
+
+  @media (max-width: 44rem) {
+    .mock-hero { grid-template-columns: 1fr; }
+    .mock-art { max-width: 15rem; }
+    .mock-sticker.s1 { top: 5.4rem; }
+  }
+
+  .cleared { columns: 2 15rem; column-gap: 2rem; }
+  .cleared li { margin-bottom: .4rem; color: var(--ink-2); break-inside: avoid; }
+  .cleared { padding-left: 1.1rem; }
+
+  footer {
+    border-top: 2px solid var(--rule-hard);
+    padding: 1.6rem 0 3rem;
+    color: var(--ink-3);
+    font-size: var(--step--1);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  footer p { margin: 0 0 .4rem; }
+
+  @media (max-width: 34rem) {
+    :root { --step-4: 2.2rem; --step-3: 1.7rem; --step-2: 1.28rem; }
+    .canon { grid-template-columns: 1fr; }
+    .cleared { columns: 1; }
+    .item { grid-template-columns: 4px 1.5rem 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    /* the cycling hero would otherwise collapse to an empty frame */
+    .flip img { opacity: 0; }
+    .flip img:first-child { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Pre-launch review · branch feat-brand-lore</p>
+    <h1>Bullcoin Site Punch List</h1>
+    <p class="standfirst">Eighteen things to fix before this replaces the live site, ordered by what costs us money and reach — plus the on-canon art to swap in.</p>
+    <dl class="facts">
+      <div><dt>Reviewed</dt><dd>7 Sep 2026</dd></div>
+      <div><dt>Build</dt><dd>bulls-website-git-feat-brand-lore</dd></div>
+      <div><dt>Checked at</dt><dd>1728 × 963, Chrome</dd></div>
+      <div><dt>Findings</dt><dd>5 blockers · 7 major · 6 polish</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="statusbar">
+  <div class="statusbar-in">
+    <span class="tally"><span class="meter"><i id="meterFill"></i></span><span id="tallyText">0 of 18 cleared</span></span>
+    <div class="filters" role="group" aria-label="Filter findings">
+      <button type="button" data-filter="all" aria-pressed="true">All 18</button>
+      <button type="button" data-filter="blocker" aria-pressed="false">Blockers 5</button>
+      <button type="button" data-filter="major" aria-pressed="false">Major 7</button>
+      <button type="button" data-filter="polish" aria-pressed="false">Polish 6</button>
+      <button type="button" data-filter="open" aria-pressed="false">Still open</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ============ MOCKUP ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Where this lands</h2><span class="anchor">mockup, not a build</span></div>
+    <p style="max-width:40rem;color:var(--ink-2);margin:.9rem 0 0">Same palette, same faces, same jokes — three blockers fixed. This is the target, so the list below reads as a route rather than a pile of complaints.</p>
+
+    <div class="mocks">
+
+      <div class="mockframe">
+        <span class="mocktag">Hero · fixes B01 B04</span>
+        <div class="mock-hero">
+          <nav class="mock-nav" aria-hidden="true">
+            <span class="mock-wordmark">Bullcoin</span>
+            <span class="on">The Mark</span><span>The Lore</span><span>Community</span><span>Bullnomics</span>
+            <span class="spacer cta">Buy $BULL</span>
+          </nav>
+          <div>
+            <span class="mock-kicker">On Robinhood Chain</span>
+            <h2 class="mock-title">BULLCOIN</h2>
+            <p class="mock-sub">100% bullshit. 0% cap. The chillest bull in finance is here to raise the floor — and the vibes.</p>
+            <div class="mock-btns">
+              <span class="mock-btn solid">Buy $BULL 🚀</span>
+              <span class="mock-btn ghost">Join the herd</span>
+            </div>
+            <a class="mock-secondary" href="#assets">Never bought a coin before? Start here ↓</a>
+            <span class="mock-pill">0x49ba…97C6 <i>Copy</i></span>
+          </div>
+          <div class="mock-art">
+            <div class="flip">
+              <img src="img/community-herd.jpg" alt="Hero frame 1: the Bull riding at the front of a stampeding herd under the words WELCOME TO THE HERD">
+              <img src="img/meme-goated.jpg" alt="Hero frame 2: two-panel meme, the Bull replying HIM? OH, HE'S GOATED">
+              <img src="img/action-cube.jpg" alt="Hero frame 3: the Bull vaulting off a large lime cube marked with the leaf logo">
+              <img src="img/meme-newbuy.jpg" alt="Hero frame 4: comic panel of the Bull flexing over falling cash under the words NEW BUY">
+              <img src="img/community-build.jpg" alt="Hero frame 5: Bull characters on scaffolding building a large stone Bull monument">
+              <img src="img/meme-gbull.jpg" alt="Hero frame 6: the Bull relaxing inside an oversized coffee cup labelled gBull">
+              <span class="flip-label">Community set · cycling</span>
+            </div>
+          </div>
+          <span class="mock-sticker s2">no cap 🧢</span>
+        </div>
+        <div class="mock-marquee" aria-hidden="true">
+          <span><b>★</b> Coolin' &amp; Bullin' <b>★</b> No cap, just horns <b>★</b> Zero tax <b>★</b> LP burned <b>★</b> +420.69% <b>★</b> 100% Bullshit <b>★</b> On Robinhood Chain <b>★</b> Coolin' &amp; Bullin'</span>
+        </div>
+      </div>
+
+      <ul class="annot">
+        <li><b>B01</b><span><strong>The buy button buys.</strong> It goes straight to the swap with the token pre-filled. The wallet-setup walkthrough moves to the plain link underneath, where the people who actually need it will look.</span></li>
+        <li><b>B04</b><span><strong>Canonical art, not the 3D GIF.</strong> The hero cycles the community set — six scenes, ~1.7s each — so the range of the character lands in the first few seconds instead of one static pose. Black-bordered with a hard offset shadow so it sits on the dot grid rather than floating in a pale box. A single canonical still works too if the cycle is too much.</span></li>
+        <li><b>—</b><span><strong>Everything else is unchanged.</strong> Same lime, same Shrikhand, same stickers, same marquee. Nothing here needs a redesign.</span></li>
+      </ul>
+
+      <div class="mockframe">
+        <span class="mocktag">Share card · fixes B02</span>
+        <div class="mock-card">
+          <div class="xcard">
+            <div class="xcard-img">
+              <div>
+                <h4>BULLCOIN</h4>
+                <p>100% BULLSHIT · 0% CAP · ROBINHOOD CHAIN</p>
+              </div>
+              <img src="img/canon-model-cut.png" alt="Mockup share card art: the canonical Bull character cut out and standing on the lime ground">
+            </div>
+            <div class="xcard-meta">
+              <b>Bullcoin — Bullin' on Robinhood</b>
+              bullcoin.xyz
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="annot">
+        <li><b>B02</b><span><strong>One 1200×630 image ends the blank cards.</strong> This is roughly what a post looks like once <code>og:image</code> exists — versus the empty grey rectangle every share produces today.</span></li>
+      </ul>
+
+      <div class="ba">
+        <div class="ba-tile ba-now">
+          <p class="lab">At rest today</p>
+          <p class="num">0%</p>
+          <p class="cap">LP burned</p>
+        </div>
+        <div class="ba-tile ba-next">
+          <p class="lab">Should say</p>
+          <p class="num">100%</p>
+          <p class="cap">LP burned</p>
+        </div>
+      </div>
+
+      <ul class="annot">
+        <li><b>M06</b><span><strong>The tile on the left is the real page</strong> before its count-up animation fires — and it's what you get with JavaScript off, reduced motion on, or if you scroll past quickly. Put the number in the HTML and animate from it.</span></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ============ HERO ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Hero</h2><span class="anchor">#the-mark</span></div>
+
+    <article class="item" data-sev="blocker" data-id="B01">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="B01" aria-label="Mark B01 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Blocker</span><span class="ref">B01 · conversion</span></div>
+        <h3>"Buy $BULL" doesn't buy anything</h3>
+        <p>Both buy buttons — the one in the header and the one in the hero — just scroll down to the "How To Bull" instructions. There is no swap link anywhere on the page. The only route to actually trading is the Dexscreener card near the bottom, four screens down, labelled "Watch the Chart".</p>
+        <p>This is the whole point of the page and it currently dead-ends into a paragraph telling people to paste a contract address somewhere else.</p>
+        <p class="fix"><b>Fix</b>Point both buy buttons at the live swap with the token pre-filled, opening in a new tab. Keep "How To Bull" as the secondary route for people without a wallet yet — a text link under the button, not the button itself.</p>
+        <pre class="ev">header  a "Buy $BULL"    href="/"  → JS sets #how-to-bull
+hero    a "Buy $BULL 🚀"  href="/"  → JS sets #how-to-bull
+hero    a "Join the herd" href="/"  → JS sets #bullish-links</pre>
+      </div>
+    </article>
+
+    <article class="item" data-sev="blocker" data-id="B04">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="B04" aria-label="Mark B04 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Blocker</span><span class="ref">B04 · brand</span></div>
+        <h3>The hero is the 3D low-poly GIF — that's not the character we use</h3>
+        <p>The first thing anyone sees is <code>bull-main.gif</code>, a faceted 3D render. That is not the canonical Bull. The canon is the flat 2D character: white graphic body, black shades, horns, nose ring, green leaf tail tip — the model that every community asset is built from.</p>
+        <p>Separately, that GIF is 360×360 natural pixels stretched to 412 CSS px, so it is soft even at the size it's shown.</p>
+        <p class="fix"><b>Fix</b>Swap in the canonical model or one of the on-canon action stills below, at 2× the display size. Reference: <code>bull-canon.vercel.app/assets/bull-model.jpg</code>. Retire the 3D GIF from the site entirely.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ SHARE / META ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Sharing &amp; metadata</h2><span class="anchor">&lt;head&gt;</span></div>
+
+    <article class="item" data-sev="blocker" data-id="B02">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="B02" aria-label="Mark B02 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Blocker</span><span class="ref">B02 · reach</span></div>
+        <h3>No share image — every X and Telegram post renders a blank card</h3>
+        <p>There is no <code>og:image</code> and no <code>twitter:image</code>. The card is declared as <code>summary_large_image</code>, which means X reserves a big image slot and then shows nothing in it. Telegram gets the same treatment. Also missing: <code>og:url</code> and a canonical link.</p>
+        <p>X and Telegram are the entire distribution for this token. Right now every link anyone shares looks broken.</p>
+        <p class="fix"><b>Fix</b>Add a 1200×630 share image using the canonical Bull on the lime ground, plus <code>og:image:width</code>/<code>height</code>, <code>og:url</code> and <code>og:site_name</code>. Then test the real URL through X's card validator and a Telegram DM to yourself before launch.</p>
+        <pre class="ev">present  og:title, og:description, og:type,
+         twitter:card=summary_large_image,
+         twitter:title, twitter:description
+missing  og:image, og:image:width, og:image:height,
+         og:url, twitter:image, link[rel=canonical]</pre>
+      </div>
+    </article>
+
+    <article class="item" data-sev="major" data-id="M12">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M12" aria-label="Mark M12 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M12 · icons</span></div>
+        <h3>The favicon is a .webp, and there's nothing else</h3>
+        <p>The only icon declared is <code>/bullcoin/logo.webp</code>. There's no apple-touch-icon, no 180px PNG, no manifest. Anyone who saves the site to a phone home screen, or opens it in Safari, gets a blank tile.</p>
+        <p class="fix"><b>Fix</b>Ship <code>favicon.ico</code> (32px), <code>icon-192.png</code>, <code>icon-512.png</code> and <code>apple-touch-icon.png</code> (180px) from the head-only version of the Bull mark, and add a small web manifest.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="polish" data-id="P19">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="P19" aria-label="Mark P19 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Polish</span><span class="ref">P19 · seo</span></div>
+        <h3>Set canonical and robots before this hits the real domain</h3>
+        <p>No <code>link[rel=canonical]</code> and no <code>meta[name=robots]</code>. Harmless on a share-token preview, but the moment this ships on the production domain we want a canonical pointing at the apex URL so preview and production deployments don't compete.</p>
+        <p class="fix"><b>Fix</b>Add canonical to the production origin, and keep preview deployments on <code>noindex</code>.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ COMMUNITY ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Community carousel</h2><span class="anchor">#community</span></div>
+
+    <article class="item" data-sev="blocker" data-id="B03">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="B03" aria-label="Mark B03 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Blocker</span><span class="ref">B03 · broken</span></div>
+        <h3>Most of the meme wall never loads — you get empty outlined boxes</h3>
+        <p>Six of the nineteen images on the page never decode. They sit in the carousel track with <code>loading="lazy"</code>, and because the track is offset horizontally, the browser decides they're off-screen and never fetches them. The files are fine: requested directly, all four return <code>200 image/webp</code>.</p>
+        <p>The ones that do load arrive one at a time over roughly ten seconds. First impression of the community section is three empty rectangles.</p>
+        <p class="fix"><b>Fix</b>Drop <code>loading="lazy"</code> on the first three slides and eager-load them; preload the rest on carousel mount rather than relying on viewport detection. Set explicit <code>width</code>/<code>height</code> on every slide so the cards don't pop in, and give each one a solid lime placeholder so a slow slide reads as loading, not as missing.</p>
+        <pre class="ev">19 img total · 13 decoded · 6 stuck at naturalWidth 0
+
+drive-escalator.webp   200 image/webp   never decoded
+drive-run.webp         200 image/webp   never decoded
+drive-bats.webp        200 image/webp   never decoded
+drive-bath.webp        200 image/webp   never decoded</pre>
+      </div>
+    </article>
+
+    <article class="item" data-sev="blocker" data-id="B05">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="B05" aria-label="Mark B05 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Blocker</span><span class="ref">B05 · content</span></div>
+        <h3>The image filenames are rotated, so the alt text describes the wrong pictures</h3>
+        <p>The asset filenames don't match their contents — the names are shifted by one position through the set. The site's alt text was written from the filenames, so it now describes pictures that aren't there. Anyone on a screen reader is told about a stadium when they're looking at a coffee cup.</p>
+        <p>Verified against the same filenames on <code>bull-canon.vercel.app</code>, so this is wrong at the source, not just on this build.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Filename</th><th>What's actually in it</th><th>Alt text says</th></tr></thead>
+            <tbody>
+              <tr><td>drive-herd</td><td>"Welcome to the herd" stampede</td><td>correct</td></tr>
+              <tr><td>drive-hoodify</td><td>Alley, bats defeated</td><td class="bad">wrong picture</td></tr>
+              <tr><td>drive-monument</td><td>Hoodify selfie with the house</td><td class="bad">wrong picture</td></tr>
+              <tr><td>drive-bats</td><td>Bath full of cash, cigar</td><td class="bad">"defeating bats"</td></tr>
+              <tr><td>drive-bath</td><td>Escalator, green glow</td><td class="bad">"absurd everyday scene"</td></tr>
+              <tr><td>drive-escalator</td><td>Stadium sprint, "BULL RUN"</td><td class="bad">"ordinary public space"</td></tr>
+              <tr><td>drive-run</td><td>Relaxing in a "gBull" coffee cup</td><td class="bad">"stadium with green energy"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fix"><b>Fix</b>Rename the files to match their contents (do it in the canon repo too so this doesn't come back), then rewrite each alt to describe the picture actually shown. One line each, plain description, no ticker copy.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="major" data-id="M07">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M07" aria-label="Mark M07 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M07 · scroll trap</span></div>
+        <h3>The carousel eats the scroll wheel — the page freezes over it</h3>
+        <p>With the cursor anywhere over the carousel, the mouse wheel does almost nothing to the page. Move the cursor a couple of hundred pixels lower and the same gesture scrolls normally. On a laptop trackpad, mid-page, this reads as the site having hung.</p>
+        <p class="fix"><b>Fix</b>Only capture horizontal wheel intent (<code>deltaX</code>), and let vertical <code>deltaY</code> pass through to the page. If the track uses <code>overscroll-behavior</code> or a wheel handler with <code>preventDefault</code>, scope it to the horizontal axis.</p>
+        <pre class="ev">cursor over carousel  (y≈400)  6 wheel ticks →   ~7 px of page scroll
+cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
+      </div>
+    </article>
+
+    <article class="item" data-sev="major" data-id="M09">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M09" aria-label="Mark M09 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M09 · controls</span></div>
+        <h3>Carousel arrows are too small, sit on top of the art, and the disabled one looks broken</h3>
+        <p>Both arrows measure 38×38 px — under the 44 px minimum for a thumb. They're positioned over the third card rather than beside the track, so they cover the art. And the "previous" arrow in its disabled state is a dark grey circle on a light ground, which reads as a rendering fault rather than "you're at the start".</p>
+        <p>There's also no dot row or counter, so in a seven-item set there's no way to know how far through you are or that there's more than one screen of memes.</p>
+        <p class="fix"><b>Fix</b>Take the arrows to 44 px, move them outside the track or onto the section header, give the disabled state a low-contrast outline instead of a filled dark circle, and add a dot row or an "n / 7" counter. Make sure left/right arrow keys drive it too.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="major" data-id="M10">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M10" aria-label="Mark M10 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M10 · layout</span></div>
+        <h3>The third card is sliced off mid-image at the container edge</h3>
+        <p>The track is wider than its container, so the third meme is cut vertically through the middle of the picture with a hard edge. There's no fade, no partial-card treatment, nothing that says "scroll for more" — it just looks like the layout overflowed.</p>
+        <p class="fix"><b>Fix</b>Either fit whole cards to the container width, or make the peek deliberate: show a consistent slice with a gradient mask into the ground colour so it reads as an affordance.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="polish" data-id="P20">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="P20" aria-label="Mark P20 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Polish</span><span class="ref">P20 · feedback</span></div>
+        <h3>Confirm the "Save" and "copy address" buttons say something happened</h3>
+        <p>The Save button only appears on hover, so on touch it's invisible until tapped. And the contract pill copies on click — check that it shows a "Copied" state afterwards, because right now there's no way to tell from the button whether it worked.</p>
+        <p class="fix"><b>Fix</b>Show Save persistently on touch devices, and give both buttons a visible confirmed state for a second or two after the action.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ BULLNOMICS ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Bullnomics</h2><span class="anchor">#bullnomics</span></div>
+
+    <article class="item" data-sev="major" data-id="M06">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M06" aria-label="Mark M06 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M06 · trust</span></div>
+        <h3>The numbers read "0 total supply" and "0% LP burned" until the animation fires</h3>
+        <p>The three stat tiles are count-up animations that start at zero and only run when you scroll them into view. Before that, the page genuinely says <code>0</code> total supply, <code>0 / 0</code> tax and <code>0%</code> LP burned. Scroll past quickly and that's what you see. It's also what anyone gets with JavaScript off, with reduced motion on, and what a page snapshot captures.</p>
+        <p>"0% LP burned" is the exact opposite of the claim we're making, on the one section people read to decide whether to trust the token.</p>
+        <p class="fix"><b>Fix</b>Put the final values in the HTML and animate from them, not toward them. When <code>prefers-reduced-motion</code> is set, skip the count entirely and show the numbers.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="polish" data-id="P13">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="P13" aria-label="Mark P13 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Polish</span><span class="ref">P13 · copy</span></div>
+        <h3>Cut "Not Bitcoin, Bullcoin. It's better."</h3>
+        <p>It opens the section by measuring us against something else, which is the weakest way to introduce anything. It's also a straight superiority claim, sitting a screen above a footer that says the token has no intrinsic value and no expectation of return. Pick one.</p>
+        <p class="fix"><b>Fix</b>Keep "Numbers so simple even a bear could understand them." and stop there. It's funnier without the second sentence.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ THE MARK / LORE ============ -->
+  <section class="area">
+    <div class="area-head"><h2>The Mark &amp; The Lore</h2><span class="anchor">#the-lore</span></div>
+
+    <article class="item" data-sev="major" data-id="M11">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M11" aria-label="Mark M11 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M11 · layout</span></div>
+        <h3>"The Bull Mark" has a half-empty left column and a stray rule in the card</h3>
+        <p>The left column holds a headline and two lines of text, then about 250 px of empty black before the section ends, while the USPTO card on the right runs full height. The section reads unfinished.</p>
+        <p>Inside the card, there's a vertical hairline to the right of the Bull logo with nothing after it — looks like an empty second cell in the header grid.</p>
+        <p class="fix"><b>Fix</b>Fill the left column — the mark itself at large scale, or pull the three headline facts (registration number, date, status) out as big type — and remove the empty grid cell so the divider goes away.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="major" data-id="M08">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="M08" aria-label="Mark M08 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Major</span><span class="ref">M08 · links</span></div>
+        <h3>Every nav link is href="/" with the scrolling bolted on in JavaScript</h3>
+        <p>All five header links, all five footer links and both hero buttons have <code>href="/"</code>. Clicking works — JavaScript intercepts it, scrolls, and writes the hash — but cmd-click, middle-click and "open in new tab" all just reload the homepage at the top. There are no real section URLs to share, and nothing crawlable.</p>
+        <p class="fix"><b>Fix</b>Use the actual fragment in the href (<code>href="#the-lore"</code>) and let the JS call <code>preventDefault</code> on top of that. Costs nothing and everything starts working the way people expect.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="polish" data-id="P14">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="P14" aria-label="Mark P14 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Polish</span><span class="ref">P14 · copy</span></div>
+        <h3>"check it for yourself bulltard" is on the one link that's asking to be believed</h3>
+        <p>Calling each other bulltards on X is the culture and it should stay there. But this particular link is the trademark record — it's the moment the page asks a stranger to go verify something. Insulting them in the same sentence undercuts the only piece of hard evidence on the site.</p>
+        <p class="fix"><b>Fix</b>"Check the USPTO record yourself ↗". Keep the in-group language for the meme wall and the marquees, where it earns its place.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="polish" data-id="P17">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="P17" aria-label="Mark P17 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Polish</span><span class="ref">P17 · performance</span></div>
+        <h3>The X embed is a third-party iframe carrying our mission statement</h3>
+        <p>The Lore section's right column is a live X post embed. It takes a few seconds to appear, ships X's tracking with it, and can't be styled to match anything else on the page. The mission copy inside it is already told better by the four numbered points sitting immediately to its left.</p>
+        <p class="fix"><b>Fix</b>Replace the iframe with a static styled quote card and a "Read on X ↗" link. Faster, on-brand, and no third-party script in the critical path.</p>
+      </div>
+    </article>
+
+    <article class="item" data-sev="polish" data-id="P18">
+      <div class="bar"></div>
+      <label class="check"><input type="checkbox" data-id="P18" aria-label="Mark P18 done"><span class="box"></span></label>
+      <div class="body">
+        <div class="top"><span class="sev">Polish</span><span class="ref">P18 · motion</span></div>
+        <h3>Every section starts near-invisible and fades in on scroll</h3>
+        <p>Scroll reveals are applied to more or less everything. Scroll at any speed and you pass through sections that haven't faded in yet — during this review, "The Bull Mark", "Bullnomics", "How To Bull" and "Bullish Links" were each blank on arrival for a moment. It also means any snapshot of the page below the fold is empty.</p>
+        <p class="fix"><b>Fix</b>Keep reveals for one or two moments that earn them and let the rest of the page render at rest. Whatever stays needs a <code>prefers-reduced-motion</code> branch that shows content immediately.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ ASSETS ============ -->
+  <section class="area" id="assets">
+    <div class="area-head"><h2>Art to swap in</h2><span class="anchor">from Bull Assets</span></div>
+
+    <div class="note">
+      <p><strong>All of this is on-canon and pulled from the shared Bull Assets drive.</strong> Everything here is the flat 2D character — white graphic body, black shades, horns, nose ring, green leaf tail tip — with no third-party characters and no real people in frame.</p>
+      <p>Sourced at 1600 px square; the drive holds the full-resolution originals. Names below are suggestions, so rename to fit whatever convention survives item B05.</p>
+    </div>
+
+    <div class="canon">
+      <img src="img/canon-model.jpg" alt="The canonical Bull: flat white graphic body, black sunglasses, horns, nose ring and a green leaf tail tip, on black">
+      <div>
+        <h3>The canonical model</h3>
+        <p>This is the reference the hero should be built from — the one the 3D GIF is currently standing in for. Every asset below is this character in a scene.</p>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Action</h3><p>for the hero and section openers</p></div>
+      <div class="shelf">
+        <figure>
+          <img src="img/action-bullrun.jpg" alt="The Bull sprinting down a stadium track ahead of the pack, green lightning trailing, BULL RUN on the scoreboard">
+          <figcaption><b>action-bullrun</b>Stadium sprint. Strongest hero candidate — motion, the ticker board, green energy.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/action-cube.jpg" alt="The Bull vaulting off a large lime cube marked with the leaf logo">
+          <figcaption><b>action-cube</b>Clean, brand-forward, lots of lime. Good on the light ground.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/action-chart.jpg" alt="The Bull riding up a rising green candlestick chart">
+          <figcaption><b>action-chart</b>Rising chart. Natural fit above Bullnomics.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Community</h3><p>for the herd and links sections</p></div>
+      <div class="shelf">
+        <figure>
+          <img src="img/community-herd.jpg" alt="The Bull riding at the front of a stampeding herd under the words WELCOME TO THE HERD">
+          <figcaption><b>community-herd</b>Already on the site and already correct. Keep it first in the carousel.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/community-staybullish.jpg" alt="STAY BULLISH poster: the Bull standing in front of a line of dark bulls">
+          <figcaption><b>community-staybullish</b>Poster-format. Works as a section header behind type.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/community-build.jpg" alt="Several Bull characters on scaffolding building a large stone Bull monument">
+          <figcaption><b>community-build</b>Building together. The best fit for "grow the chain with the herd".</figcaption>
+        </figure>
+        <figure>
+          <img src="img/community-table.jpg" alt="The Bull sharing a meal at a restaurant table with another character">
+          <figcaption><b>community-table</b>Quieter, social. Good counterweight to the action set.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/community-hoodify.jpg" alt="The Bull taking a selfie with the Robinhood house mascot on a green sofa">
+          <figcaption><b>community-hoodify</b>Strong, but it puts our character next to Robinhood's mascot — check with Tyler first.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Meme</h3><p>for the carousel</p></div>
+      <div class="shelf">
+        <figure>
+          <img src="img/meme-goated.jpg" alt="Two-panel meme: a character on the phone, the Bull replying HIM? OH, HE'S GOATED">
+          <figcaption><b>meme-goated</b>Speech-bubble format. Reads instantly at thumbnail size.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/meme-newbuy.jpg" alt="Comic panel of the Bull flexing over falling cash under the words NEW BUY">
+          <figcaption><b>meme-newbuy</b>Comic panel, high contrast, lots of lime.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/meme-brokie.jpg" alt="The Bull handing a phone to a pink wojak character with the caption brokie">
+          <figcaption><b>meme-brokie</b>Classic format. Sharpest of the set for X.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/meme-gbull.jpg" alt="The Bull relaxing inside an oversized coffee cup labelled gBull in front of a window at sunrise">
+          <figcaption><b>meme-gbull</b>The "gBull" morning post. Currently misfiled as drive-run.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/meme-moneybath.jpg" alt="The Bull reclining in a bathtub full of cash with a cigar and a whisky glass">
+          <figcaption><b>meme-moneybath</b>Currently misfiled as drive-bats. Cigar and cash — confirm it's wanted on the site.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="note">
+      <p><strong>Leave these in the drive.</strong> Four assets in the same folder shouldn't go anywhere near the site: one uses a recognisable public figure's likeness, one puts our character into another studio's cartoon, and two are disaster scenes — a burning aircraft and a body on a floor. All four are either a rights problem or a tone problem the token doesn't need.</p>
+    </div>
+  </section>
+
+  <!-- ============ CLEARED ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Already right</h2><span class="anchor">no action</span></div>
+    <p style="max-width:40rem;color:var(--ink-2);margin:.9rem 0 1rem">Checked and fine — noting it so nobody spends time re-doing work that's already good.</p>
+    <ul class="cleared">
+      <li>Heading order runs h1 → h2 → h3 with no skipped levels.</li>
+      <li><code>lang="en"</code> and the viewport meta are both set correctly.</li>
+      <li>A real meta description is in place.</li>
+      <li>Every external link carries <code>rel="noopener noreferrer"</code>.</li>
+      <li>The contract pill, both carousel arrows and the mobile menu button all have proper aria-labels.</li>
+      <li>No horizontal page overflow — the marquees are clipped properly rather than widening the document.</li>
+      <li>All four Bullish Links resolve: X, Telegram, the Dexscreener pair and the Blockscout token page.</li>
+      <li>Every "Save" link points at a real file that downloads.</li>
+      <li>The type pairing — Shrikhand over Baloo 2 — is doing real work. Don't touch it.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>Reviewed at 1728 × 963 in Chrome on macOS. Findings verified against the DOM and the network, not from screenshots alone.</p>
+  <p>Ticks are remembered in your own browser, so you can work down the list across sittings.</p>
+</footer>
+
+<script>
+  (function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll(".item"));
+    var boxes = Array.prototype.slice.call(document.querySelectorAll(".check input"));
+    var tallyText = document.getElementById("tallyText");
+    var meterFill = document.getElementById("meterFill");
+    var filterButtons = Array.prototype.slice.call(document.querySelectorAll(".filters button"));
+    var activeFilter = "all";
+    var total = items.length;
+    var KEY = "bullcoin-punch-list-v1";
+
+    function load() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) || "{}") || {};
+      } catch (e) {
+        return {};
+      }
+    }
+    function save(state) {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+      } catch (e) {
+        /* private window or blocked site data — the list still works, it just won't remember */
+      }
+    }
+
+    function paint() {
+      var done = 0;
+      items.forEach(function (item) {
+        var box = item.querySelector(".check input");
+        var isDone = box && box.checked;
+        if (isDone) done++;
+        item.classList.toggle("done", !!isDone);
+        var show =
+          activeFilter === "all" ? true :
+          activeFilter === "open" ? !isDone :
+          item.getAttribute("data-sev") === activeFilter;
+        item.classList.toggle("is-hidden", !show);
+      });
+      tallyText.textContent = done + " of " + total + " cleared";
+      meterFill.style.width = Math.round((done / total) * 100) + "%";
+    }
+
+    filterButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        activeFilter = button.getAttribute("data-filter");
+        filterButtons.forEach(function (other) {
+          other.setAttribute("aria-pressed", other === button ? "true" : "false");
+        });
+        paint();
+      });
+    });
+
+    var state = load();
+    boxes.forEach(function (box) {
+      var id = box.getAttribute("data-id");
+      if (state[id]) box.checked = true;
+      box.addEventListener("change", function () {
+        if (box.checked) {
+          state[id] = true;
+        } else {
+          delete state[id];
+        }
+        save(state);
+        paint();
+      });
+    });
+
+    paint();
+  })();
+</script>
+</body>
+</html>
