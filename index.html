@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 17 desktop findings, a hero mockup using the existing motion set, and the on-canon art to swap in.">
+<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 17 desktop findings, a hero mockup, and a production-ready asset handoff.">
 <link rel="icon" type="image/png" href="img/canon-model-cut.png">
 <title>Bullcoin Site Punch List</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Baloo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -446,6 +446,21 @@
     font-size: .6rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase;
     background: #15170E; color: #C9F73B; padding: .2rem .5rem;
   }
+
+  /* download block */
+  .grab { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .8rem; margin: 1.3rem 0 0; }
+  .grab a {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border: 2px solid var(--rule-hard);
+    box-shadow: 4px 4px 0 var(--rule-hard); padding: .9rem 1rem;
+  }
+  .grab a:hover { background: var(--lime); }
+  .grab b { display: block; font-size: var(--step-1); }
+  .grab span {
+    display: block; margin-top: .2rem; color: var(--ink-2);
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: var(--step--1);
+  }
+  .grab a:hover span { color: var(--lime-ink); }
 
   /* motion library */
   .loops { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: .8rem; }
@@ -926,6 +941,25 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
     </article>
   </section>
 
+  <!-- ============ HANDOFF ============ -->
+  <section class="area">
+    <div class="area-head"><h2>Take the assets</h2><span class="anchor">for the dev</span></div>
+    <div class="note">
+      <p><strong>Everything referenced on this page, production-ready and correctly named.</strong> The six hero loops are already encoded as MP4 + WebM with poster frames, the 15 stills are WebP with JPEG fallbacks, and the share card is rendered at 1200×630. Both zips carry the same <code>README.md</code>, written so the dev's agent can act on it, plus a <code>manifest.json</code> index.</p>
+      <div class="grab">
+        <a href="handoff/bullcoin-assets-web.zip" download>
+          <b>Web-ready assets ↓</b>
+          <span>12 MB · zip · start here</span>
+        </a>
+        <a href="handoff/bullcoin-assets-source.zip" download>
+          <b>Source originals ↓</b>
+          <span>57 MB · zip · 2048 px stills + GIF masters</span>
+        </a>
+      </div>
+      <p style="margin-top:.9rem">The web zip is small enough to email. Only reach for the source zip to re-crop a still or re-render a loop.</p>
+    </div>
+  </section>
+
   <!-- ============ MOTION ============ -->
   <section class="area" id="motion">
     <div class="area-head"><h2>Motion you already have</h2><span class="anchor">~/Documents/bull</span></div>
@@ -969,11 +1003,12 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
 
     <div class="group">
       <div class="group-head"><h3>Ship these as video, not GIF</h3><p>the single biggest weight win available</p></div>
-      <p style="max-width:40rem;color:var(--ink-2);margin:0 0 .7rem">The 19 GIFs total 74&nbsp;MB. 12 of them already have an MP4 rendered next to them, typically a third of the size at better quality — <code>01-mark-loop</code> is 3.4&nbsp;MB as a GIF and 1.4&nbsp;MB as MP4. A GIF also can't do 60&nbsp;fps or alpha, and it decodes on the main thread.</p>
-      <p class="fix" style="max-width:40rem"><b>Fix</b>Use <code>&lt;video autoplay muted loop playsinline preload="metadata" poster="…"&gt;</code> with the existing MP4s and a WebM fallback. Reserve GIF for the three that have no MP4 yet, or re-render those too. Always ship a poster frame so the hero has something at rest.</p>
+      <p style="max-width:40rem;color:var(--ink-2);margin:0 0 .7rem">The 19 GIFs total 74&nbsp;MB. Twelve have an MP4 sitting beside them, but those are masters at inconsistent bitrates — <strong>seven are smaller than the GIF and five are actually bigger</strong>. <code>03-logo-reveal</code>'s MP4 is three times its GIF. So don't just swap the existing MP4s in; they need a web encode.</p>
+      <p style="max-width:40rem;color:var(--ink-2);margin:0 0 .7rem">Encoded properly the win is large. The six loops above come to 12.6&nbsp;MB as GIF and <strong>2.64&nbsp;MB as H.264</strong> — 21% — and that is at 540&nbsp;px and 24&nbsp;fps, against GIFs that are only 280&nbsp;px and 9&nbsp;fps. Better picture, a fifth of the weight. GIF also caps at 256 colours and decodes on the main thread.</p>
+      <p class="fix" style="max-width:40rem"><b>Fix</b>Use <code>&lt;video autoplay muted loop playsinline preload="metadata" poster="…"&gt;</code> with an MP4 plus WebM source. The handoff zip has all six already encoded at crf&nbsp;26 / vp9 crf&nbsp;36 with poster frames, so this is a copy-in. Always ship the poster so the hero has something at rest.</p>
       <div class="tablewrap">
         <table class="reeltable">
-          <thead><tr><th>Loop</th><th>Reel</th><th>Size</th><th>Frames</th><th>GIF weight</th><th>MP4 exists</th><th>Ground</th></tr></thead>
+          <thead><tr><th>Loop</th><th>Reel</th><th>Size</th><th>Frames</th><th>GIF weight</th><th>MP4 beside it</th><th>Ground</th></tr></thead>
           <tbody>
               <tr><td>new-buy-forward</td><td>reel-v10</td><td>480×480</td><td>72f</td><td>2.3 MB</td><td class="">—</td><td class="clash">orange</td></tr>
               <tr><td>animated</td><td>reel-v2</td><td>360×640</td><td>102f</td><td>2.8 MB</td><td class="">—</td><td>on palette</td></tr>
