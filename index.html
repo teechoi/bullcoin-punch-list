@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 17 desktop findings, a hero mockup, and the on-canon art to swap in.">
+<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 17 desktop findings, a hero mockup using the existing motion set, and the on-canon art to swap in.">
 <link rel="icon" type="image/png" href="img/canon-model-cut.png">
 <title>Bullcoin Site Punch List</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Baloo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -428,31 +428,31 @@
   .mock-pill i { background: #15170E; color: #C9F73B; border-radius: 999px; padding: .12rem .45rem; font-style: normal; font-size: .62rem; }
   .mock-art { border: 3px solid #15170E; box-shadow: 7px 7px 0 rgba(21,23,14,.3); background: #15170E; position: relative; }
 
-  /* hero art cycles the community set so the versatility reads at a glance */
-  .flip { position: relative; aspect-ratio: 1; overflow: hidden; }
-  .flip img {
-    position: absolute; inset: 0;
-    display: block; width: 100%; height: 100%; object-fit: cover;
-    opacity: 0;
-    animation: flipframe 10.2s linear infinite;
+  /* hero plays the motion set: one loop at a time, dots to step through */
+  .gifstage { position: relative; aspect-ratio: 1; overflow: hidden; background: #15170E; }
+  .gifstage img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .gifdots {
+    position: absolute; bottom: .45rem; right: .45rem; z-index: 2;
+    display: flex; gap: .28rem;
   }
-  .flip img:nth-child(1) { animation-delay: 0s; }
-  .flip img:nth-child(2) { animation-delay: 1.7s; }
-  .flip img:nth-child(3) { animation-delay: 3.4s; }
-  .flip img:nth-child(4) { animation-delay: 5.1s; }
-  .flip img:nth-child(5) { animation-delay: 6.8s; }
-  .flip img:nth-child(6) { animation-delay: 8.5s; }
-  @keyframes flipframe {
-    0%, 14.5%  { opacity: 1; }
-    16.6%, 98% { opacity: 0; }
-    100%       { opacity: 1; }
+  .gifdots button {
+    width: .5rem; height: .5rem; padding: 0; border-radius: 999px; cursor: pointer;
+    border: 1px solid #15170E; background: rgba(238,237,226,.55);
   }
+  .gifdots button[aria-current="true"] { background: #C9F73B; }
   .flip-label {
     position: absolute; bottom: 0; left: 0; z-index: 2;
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: .6rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase;
     background: #15170E; color: #C9F73B; padding: .2rem .5rem;
   }
+
+  /* motion library */
+  .loops { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: .8rem; }
+  .loops figure img { border: 2px solid var(--rule-hard); background: #15170E; }
+  .reeltable td:first-child, .reeltable td:nth-child(4) { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  .reeltable td.on { color: var(--lime-deep); font-weight: 600; }
+
   .mock-sticker {
     position: absolute;
     font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: .68rem;
@@ -548,9 +548,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
-    /* the cycling hero would otherwise collapse to an empty frame */
-    .flip img { opacity: 0; }
-    .flip img:first-child { opacity: 1; }
+    /* the hero stage stops auto-advancing; see the script */
+    .gifdots button { transition: none; }
   }
 </style>
 </head>
@@ -611,14 +610,10 @@
             <span class="mock-pill">0x49ba…97C6 <i>Copy</i></span>
           </div>
           <div class="mock-art">
-            <div class="flip">
-              <img src="img/community-herd.jpg" alt="Hero frame 1: the Bull riding at the front of a stampeding herd under the words WELCOME TO THE HERD">
-              <img src="img/meme-goated.jpg" alt="Hero frame 2: two-panel meme, the Bull replying HIM? OH, HE'S GOATED">
-              <img src="img/action-cube.jpg" alt="Hero frame 3: the Bull vaulting off a large lime cube marked with the leaf logo">
-              <img src="img/meme-newbuy.jpg" alt="Hero frame 4: comic panel of the Bull flexing over falling cash under the words NEW BUY">
-              <img src="img/community-build.jpg" alt="Hero frame 5: Bull characters on scaffolding building a large stone Bull monument">
-              <img src="img/meme-gbull.jpg" alt="Hero frame 6: the Bull relaxing inside an oversized coffee cup labelled gBull">
-              <span class="flip-label">Community set · cycling</span>
+            <div class="gifstage" data-srcs="img/hero-mark-loop.gif|img/hero-two-step.gif|img/hero-bull-army.gif|img/hero-body-loop.gif|img/hero-editorial.gif|img/hero-logo-reveal.gif" data-labels="Mark loop|Two-step|Bull army|Body loop|Editorial cuts|Logo reveal">
+              <img id="gifFrame" src="img/hero-mark-loop.gif" alt="Hero motion: the Bull mark looping inside a roundel with orbiting leaves">
+              <span class="flip-label" id="gifLabel">Mark loop · 1/6</span>
+              <div class="gifdots" role="group" aria-label="Choose a loop"></div>
             </div>
           </div>
           <span class="mock-sticker s2">no cap 🧢</span>
@@ -630,7 +625,7 @@
 
       <ul class="annot">
         <li><b>B01</b><span><strong>The buy button buys.</strong> It goes straight to the swap with the token pre-filled. The wallet-setup walkthrough moves to the plain link underneath, where the people who actually need it will look.</span></li>
-        <li><b>B04</b><span><strong>Canonical art, not the 3D GIF.</strong> The hero cycles the community set — six scenes, ~1.7s each — so the range of the character lands in the first few seconds instead of one static pose. Black-bordered with a hard offset shadow so it sits on the dot grid rather than floating in a pale box. A single canonical still works too if the cycle is too much.</span></li>
+        <li><b>B04</b><span><strong>Your own motion, not the 3D GIF.</strong> The hero plays the loops you already made — the mark loop first, so the logo is the first thing that moves — and steps through six of them. Dots let you pick one. Black-bordered with a hard offset shadow so it sits on the dot grid rather than floating in a pale box.</span></li>
         <li><b>—</b><span><strong>Everything else is unchanged.</strong> Same lime, same Shrikhand, same stickers, same marquee. Nothing here needs a redesign.</span></li>
       </ul>
 
@@ -930,6 +925,78 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
     </article>
   </section>
 
+  <!-- ============ MOTION ============ -->
+  <section class="area" id="motion">
+    <div class="area-head"><h2>Motion you already have</h2><span class="anchor">~/Documents/bull</span></div>
+
+    <div class="note">
+      <p><strong>There are 19 finished loops sitting in <code>~/Documents/bull</code>, and the site ships none of them.</strong> It ships a low-poly 3D GIF instead. Three of the 19 animate the Bull mark directly — that is the asset the hero is missing.</p>
+      <p>Start with <code>01-mark-loop</code>: the logo, moving, on brand, already made. The six below are the ones with flat grounds, which sit on the lime without fighting it.</p>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Pick of the set</h3><p>re-encoded to 280&nbsp;px for this page — originals are 540&nbsp;px</p></div>
+      <div class="shelf loops">
+        <figure>
+          <img src="img/hero-mark-loop.gif" alt="Animated loop: mark-loop" loading="lazy">
+          <figcaption><b>mark-loop</b>The logo mark itself, orbiting leaves. The one to lead with.<br>reel-x-v11</figcaption>
+        </figure>
+        <figure>
+          <img src="img/hero-two-step.gif" alt="Animated loop: bull-two-step" loading="lazy">
+          <figcaption><b>bull-two-step</b>Clean dance loop on a ring. Newest of the set.<br>reel-x-v14</figcaption>
+        </figure>
+        <figure>
+          <img src="img/hero-bull-army.gif" alt="Animated loop: bull-army" loading="lazy">
+          <figcaption><b>bull-army</b>Lime ground, full herd. Straight brand energy.<br>reel-x-v12</figcaption>
+        </figure>
+        <figure>
+          <img src="img/hero-body-loop.gif" alt="Animated loop: body-loop" loading="lazy">
+          <figcaption><b>body-loop</b>Walk cycle across lime and cream.<br>reel-x-v11</figcaption>
+        </figure>
+        <figure>
+          <img src="img/hero-editorial.gif" alt="Animated loop: editorial-cuts" loading="lazy">
+          <figcaption><b>editorial-cuts</b>Four-up editorial cuts, palette shifts.<br>reel-x-v12</figcaption>
+        </figure>
+        <figure>
+          <img src="img/hero-logo-reveal.gif" alt="Animated loop: logo-reveal" loading="lazy">
+          <figcaption><b>logo-reveal</b>Mark draws on, then the character lands.<br>reel-x-v12</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><h3>Ship these as video, not GIF</h3><p>the single biggest weight win available</p></div>
+      <p style="max-width:40rem;color:var(--ink-2);margin:0 0 .7rem">The 19 GIFs total 74&nbsp;MB. 12 of them already have an MP4 rendered next to them, typically a third of the size at better quality — <code>01-mark-loop</code> is 3.4&nbsp;MB as a GIF and 1.4&nbsp;MB as MP4. A GIF also can't do 60&nbsp;fps or alpha, and it decodes on the main thread.</p>
+      <p class="fix" style="max-width:40rem"><b>Fix</b>Use <code>&lt;video autoplay muted loop playsinline preload="metadata" poster="…"&gt;</code> with the existing MP4s and a WebM fallback. Reserve GIF for the three that have no MP4 yet, or re-render those too. Always ship a poster frame so the hero has something at rest.</p>
+      <div class="tablewrap">
+        <table class="reeltable">
+          <thead><tr><th>Loop</th><th>Reel</th><th>Size</th><th>Frames</th><th>GIF weight</th><th>MP4 exists</th></tr></thead>
+          <tbody>
+              <tr><td>new-buy-forward</td><td>reel-v10</td><td>480×480</td><td>72f</td><td>2.3 MB</td><td class="">—</td></tr>
+              <tr><td>animated</td><td>reel-v2</td><td>360×640</td><td>102f</td><td>2.8 MB</td><td class="">—</td></tr>
+              <tr><td>bull-dance</td><td>reel-v4</td><td>360×640</td><td>96f</td><td>6.6 MB</td><td class="">—</td></tr>
+              <tr><td>bull-boardroom</td><td>reel-v5</td><td>360×640</td><td>96f</td><td>10.8 MB</td><td class="">—</td></tr>
+              <tr><td>bull-boardroom-preview-v6</td><td>reel-v6</td><td>360×640</td><td>96f</td><td>10.6 MB</td><td class="on">yes</td></tr>
+              <tr><td>bull-mark-motion</td><td>reel-v7</td><td>360×640</td><td>96f</td><td>2.6 MB</td><td class="">—</td></tr>
+              <tr><td>new-buy-cash-walk</td><td>reel-v8</td><td>480×480</td><td>72f</td><td>4.9 MB</td><td class="">—</td></tr>
+              <tr><td>new-buy-true-walk</td><td>reel-v9</td><td>480×480</td><td>72f</td><td>3.7 MB</td><td class="">—</td></tr>
+              <tr><td>01-mark-loop</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>3.4 MB</td><td class="on">yes</td></tr>
+              <tr><td>02-body-loop</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>2.9 MB</td><td class="on">yes</td></tr>
+              <tr><td>03-forward-charge</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>6.2 MB</td><td class="on">yes</td></tr>
+              <tr><td>01-editorial-cuts</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>1.1 MB</td><td class="on">yes</td></tr>
+              <tr><td>02-spotlight</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>1.3 MB</td><td class="on">yes</td></tr>
+              <tr><td>03-logo-reveal</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>0.4 MB</td><td class="on">yes</td></tr>
+              <tr><td>04-bull-army</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>2.1 MB</td><td class="on">yes</td></tr>
+              <tr><td>01-roller-rink</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>4.3 MB</td><td class="on">yes</td></tr>
+              <tr><td>02-midnight-diner</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>3.6 MB</td><td class="on">yes</td></tr>
+              <tr><td>03-rooftop-boombox</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>3.2 MB</td><td class="on">yes</td></tr>
+              <tr><td>bull-two-step-v14</td><td>reel-x-v14</td><td>540×540</td><td>59f</td><td>1.3 MB</td><td class="on">yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ ASSETS ============ -->
   <section class="area" id="assets">
     <div class="area-head"><h2>Art to swap in</h2><span class="anchor">from Bull Assets</span></div>
@@ -992,7 +1059,7 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
     </div>
 
     <div class="group">
-      <div class="group-head"><h3>Meme</h3><p>for the carousel</p></div>
+      <div class="group-head"><h3>Meme</h3><p>for the community carousel — the hero uses the motion set instead</p></div>
       <div class="shelf">
         <figure>
           <img src="img/meme-goated.jpg" alt="Two-panel meme: a character on the phone, the Bull replying HIM? OH, HE'S GOATED">
@@ -1130,6 +1197,44 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
     });
 
     paint();
+
+    // ---- hero motion stage: one loop at a time, dots to step through ----
+    const stage = document.querySelector(".gifstage");
+    if (stage) {
+      const srcs = (stage.getAttribute("data-srcs") || "").split("|").filter(Boolean);
+      const labels = (stage.getAttribute("data-labels") || "").split("|");
+      const frame = document.getElementById("gifFrame");
+      const label = document.getElementById("gifLabel");
+      const dots = stage.querySelector(".gifdots");
+      let at = 0, timer = null;
+      const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      srcs.forEach(function (s, n) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", labels[n] || "Loop " + (n + 1));
+        b.setAttribute("aria-current", n === 0 ? "true" : "false");
+        b.addEventListener("click", function () { show(n); restart(); });
+        dots.appendChild(b);
+      });
+
+      function show(n) {
+        at = (n + srcs.length) % srcs.length;
+        frame.src = srcs[at];
+        if (label) label.textContent = (labels[at] || "Loop") + " · " + (at + 1) + "/" + srcs.length;
+        [...dots.children].forEach(function (b, i) {
+          b.setAttribute("aria-current", i === at ? "true" : "false");
+        });
+      }
+      function restart() {
+        if (still) return;
+        clearInterval(timer);
+        timer = setInterval(function () { show(at + 1); }, 3600);
+      }
+      // warm the rest so a step is instant
+      srcs.slice(1).forEach(function (s) { const i = new Image(); i.src = s; });
+      restart();
+    }
   })();
 </script>
 </body>
