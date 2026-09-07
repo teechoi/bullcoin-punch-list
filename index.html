@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 18 findings, a hero mockup, and the on-canon art to swap in.">
+<meta name="description" content="Pre-launch review of the Bullcoin feat-brand-lore build: 17 desktop findings, a hero mockup, and the on-canon art to swap in.">
 <link rel="icon" type="image/png" href="img/canon-model-cut.png">
 <title>Bullcoin Site Punch List</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Baloo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -559,24 +559,24 @@
   <div class="wrap">
     <p class="eyebrow">Pre-launch review · branch feat-brand-lore</p>
     <h1>Bullcoin Site Punch List</h1>
-    <p class="standfirst">Eighteen things to fix before this replaces the live site, ordered by what costs us money and reach — plus the on-canon art to swap in.</p>
+    <p class="standfirst">Seventeen things to fix before this replaces the live site, ordered by what costs us money and reach — plus the on-canon art to swap in.</p>
     <dl class="facts">
       <div><dt>Reviewed</dt><dd>7 Sep 2026</dd></div>
       <div><dt>Build</dt><dd>bulls-website-git-feat-brand-lore</dd></div>
       <div><dt>Checked at</dt><dd>1728 × 963, Chrome</dd></div>
-      <div><dt>Findings</dt><dd>5 blockers · 7 major · 6 polish</dd></div>
+      <div><dt>Findings</dt><dd>5 blockers · 7 major · 5 polish</dd></div>
     </dl>
   </div>
 </header>
 
 <div class="statusbar">
   <div class="statusbar-in">
-    <span class="tally"><span class="meter"><i id="meterFill"></i></span><span id="tallyText">0 of 18 cleared</span></span>
+    <span class="tally"><span class="meter"><i id="meterFill"></i></span><span id="tallyText">0 of 17 cleared</span></span>
     <div class="filters" role="group" aria-label="Filter findings">
-      <button type="button" data-filter="all" aria-pressed="true">All 18</button>
+      <button type="button" data-filter="all" aria-pressed="true">All 17</button>
       <button type="button" data-filter="blocker" aria-pressed="false">Blockers 5</button>
       <button type="button" data-filter="major" aria-pressed="false">Major 7</button>
-      <button type="button" data-filter="polish" aria-pressed="false">Polish 6</button>
+      <button type="button" data-filter="polish" aria-pressed="false">Polish 5</button>
       <button type="button" data-filter="open" aria-pressed="false">Still open</button>
     </div>
   </div>
@@ -822,6 +822,7 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
         <h3>Carousel arrows are too small, sit on top of the art, and the disabled one looks broken</h3>
         <p>Both arrows measure 38×38 px — under the 44 px minimum for a thumb. They're positioned over the third card rather than beside the track, so they cover the art. And the "previous" arrow in its disabled state is a dark grey circle on a light ground, which reads as a rendering fault rather than "you're at the start".</p>
         <p>There's also no dot row or counter, so in a seven-item set there's no way to know how far through you are or that there's more than one screen of memes.</p>
+        <p><em>Desktop only.</em> There's a separate <code>.carousel-mobile-dock</code> in the CSS, so the touch controls are built differently — I couldn't render mobile to check them (see the note at the end).</p>
         <p class="fix"><b>Fix</b>Take the arrows to 44 px, move them outside the track or onto the section header, give the disabled state a low-contrast outline instead of a filled dark circle, and add a dot row or an "n / 7" counter. Make sure left/right arrow keys drive it too.</p>
       </div>
     </article>
@@ -837,16 +838,6 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
       </div>
     </article>
 
-    <article class="item" data-sev="polish" data-id="P20">
-      <div class="bar"></div>
-      <label class="check"><input type="checkbox" data-id="P20" aria-label="Mark P20 done"><span class="box"></span></label>
-      <div class="body">
-        <div class="top"><span class="sev">Polish</span><span class="ref">P20 · feedback</span></div>
-        <h3>Confirm the "Save" and "copy address" buttons say something happened</h3>
-        <p>The Save button only appears on hover, so on touch it's invisible until tapped. And the contract pill copies on click — check that it shows a "Copied" state afterwards, because right now there's no way to tell from the button whether it worked.</p>
-        <p class="fix"><b>Fix</b>Show Save persistently on touch devices, and give both buttons a visible confirmed state for a second or two after the action.</p>
-      </div>
-    </article>
   </section>
 
   <!-- ============ BULLNOMICS ============ -->
@@ -932,8 +923,9 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
       <div class="body">
         <div class="top"><span class="sev">Polish</span><span class="ref">P18 · motion</span></div>
         <h3>Every section starts near-invisible and fades in on scroll</h3>
-        <p>Scroll reveals are applied to more or less everything. Scroll at any speed and you pass through sections that haven't faded in yet — during this review, "The Bull Mark", "Bullnomics", "How To Bull" and "Bullish Links" were each blank on arrival for a moment. It also means any snapshot of the page below the fold is empty.</p>
-        <p class="fix"><b>Fix</b>Keep reveals for one or two moments that earn them and let the rest of the page render at rest. Whatever stays needs a <code>prefers-reduced-motion</code> branch that shows content immediately.</p>
+        <p>Thirty elements carry a <code>.reveal</code> class. Scroll at any speed and you pass through sections that haven't faded in yet — during this review, "The Bull Mark", "Bullnomics", "How To Bull" and "Bullish Links" were each blank on arrival for a moment. With the page sitting at the top, 19 full-height blocks are already parked below full opacity waiting on an observer.</p>
+        <p>The <code>prefers-reduced-motion</code> block is real, but it only covers the hero entrance and the carousel hint — it never mentions <code>.reveal</code>. So with reduced motion on, the hero behaves and everything below it still waits to fade in.</p>
+        <p class="fix"><b>Fix</b>Add <code>.reveal</code> to the existing reduced-motion block so it resolves to full opacity there. Then keep the reveal for one or two sections that earn it and let the rest render at rest.</p>
       </div>
     </article>
   </section>
@@ -1030,6 +1022,18 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
     </div>
   </section>
 
+  <!-- ============ NOT COVERED ============ -->
+  <section class="area">
+    <div class="area-head"><h2>What this review misses</h2><span class="anchor">be aware</span></div>
+    <div class="note">
+      <p><strong>Everything above was checked at 1728 × 963 in desktop Chrome, and only there.</strong> The tooling I reviewed with renders at a fixed viewport, so I could not load the site at phone or tablet width. Treat all seventeen findings as desktop findings.</p>
+      <p>That is the wrong way round for this site. The traffic arrives from a Telegram message or an X post, which means a phone, in an in-app browser. That viewport is the one that matters most and it is the one I have no coverage of.</p>
+      <p>The responsive work does exist — there are breakpoints at 1020, 880, 640, 600 and 560 px, a <code>.burger</code> menu button, a dedicated <code>.carousel-mobile-dock</code>, and <code>(hover: none)</code> rules that pin the Save button visible on touch. None of it is verified.</p>
+      <p><strong>Worth a pass on a real phone before launch:</strong> the hamburger menu opening and closing, the hero at 390 px wide, whether the carousel scroll-trap in M07 is worse or better under touch, the USPTO table (12 rows of label/value that will want to stack), the four-across "How To Bull" cards, and tap-target sizes throughout.</p>
+      <p>Also unchecked: keyboard tab order and focus rings, Safari and Firefox, and in-app browsers specifically.</p>
+    </div>
+  </section>
+
   <!-- ============ CLEARED ============ -->
   <section class="area">
     <div class="area-head"><h2>Already right</h2><span class="anchor">no action</span></div>
@@ -1044,13 +1048,16 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
       <li>All four Bullish Links resolve: X, Telegram, the Dexscreener pair and the Blockscout token page.</li>
       <li>Every "Save" link points at a real file that downloads.</li>
       <li>The type pairing — Shrikhand over Baloo 2 — is doing real work. Don't touch it.</li>
+      <li>Copying the contract address shows a "Contract address copied" toast. Tested, works.</li>
+      <li>The Save button is pinned visible under <code>(hover: none)</code>, so touch users can see it.</li>
+      <li>The hero entrance animation has a proper <code>prefers-reduced-motion</code> branch.</li>
     </ul>
   </section>
 
 </main>
 
 <footer class="wrap">
-  <p>Reviewed at 1728 × 963 in Chrome on macOS. Findings verified against the DOM and the network, not from screenshots alone.</p>
+  <p>Reviewed at 1728 × 963 in Chrome on macOS — desktop only. Findings verified against the DOM, the CSS and the network, not from screenshots alone.</p>
   <p>Ticks are remembered in your own browser, so you can work down the list across sittings.</p>
 </footer>
 
