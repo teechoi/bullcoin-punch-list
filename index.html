@@ -452,6 +452,7 @@
   .loops figure img { border: 2px solid var(--rule-hard); background: #15170E; }
   .reeltable td:first-child, .reeltable td:nth-child(4) { font-family: "JetBrains Mono", ui-monospace, monospace; }
   .reeltable td.on { color: var(--lime-deep); font-weight: 600; }
+  .reeltable td.clash { color: var(--blocker); font-weight: 600; }
 
   .mock-sticker {
     position: absolute;
@@ -610,7 +611,7 @@
             <span class="mock-pill">0x49ba…97C6 <i>Copy</i></span>
           </div>
           <div class="mock-art">
-            <div class="gifstage" data-srcs="img/hero-mark-loop.gif|img/hero-two-step.gif|img/hero-bull-army.gif|img/hero-body-loop.gif|img/hero-editorial.gif|img/hero-logo-reveal.gif" data-labels="Mark loop|Two-step|Bull army|Body loop|Editorial cuts|Logo reveal">
+            <div class="gifstage" data-srcs="img/hero-mark-loop.gif|img/hero-bull-army.gif|img/hero-mark-motion.gif|img/hero-body-loop.gif|img/hero-editorial.gif|img/hero-logo-reveal.gif" data-labels="Mark loop|Bull army|Mark motion|Body loop|Editorial cuts|Logo reveal">
               <img id="gifFrame" src="img/hero-mark-loop.gif" alt="Hero motion: the Bull mark looping inside a roundel with orbiting leaves">
               <span class="flip-label" id="gifLabel">Mark loop · 1/6</span>
               <div class="gifdots" role="group" aria-label="Choose a loop"></div>
@@ -931,7 +932,9 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
 
     <div class="note">
       <p><strong>There are 19 finished loops sitting in <code>~/Documents/bull</code>, and the site ships none of them.</strong> It ships a low-poly 3D GIF instead. Three of the 19 animate the Bull mark directly — that is the asset the hero is missing.</p>
-      <p>Start with <code>01-mark-loop</code>: the logo, moving, on brand, already made. The six below are the ones with flat grounds, which sit on the lime without fighting it.</p>
+      <p>Start with <code>01-mark-loop</code>: the logo, moving, on brand, already made. The six below are the ones whose grounds are lime, cream or near-black — they sit on the site's lime without fighting it.</p>
+      <p><strong>The palette test matters more than the animation.</strong> <code>bull-two-step</code> is the cleanest dance loop in the set and it still can't go in the hero: 42% of its frame is navy <code>#000048</code> with a magenta ring, so the lime ground reads as a mistake for the two seconds it's up. Same disqualification for <code>02-spotlight</code> (navy), <code>01-roller-rink</code> and <code>03-rooftop-boombox</code> (purple), and the <code>new-buy</code> pair (warm orange city).</p>
+      <p>Anything going into a lime frame wants a ground in the family — lime, cream, olive or near-black. The rest are fine on their own, on X, or on a dark section.</p>
     </div>
 
     <div class="group">
@@ -942,8 +945,8 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
           <figcaption><b>mark-loop</b>The logo mark itself, orbiting leaves. The one to lead with.<br>reel-x-v11</figcaption>
         </figure>
         <figure>
-          <img src="img/hero-two-step.gif" alt="Animated loop: bull-two-step" loading="lazy">
-          <figcaption><b>bull-two-step</b>Clean dance loop on a ring. Newest of the set.<br>reel-x-v14</figcaption>
+          <img src="img/hero-mark-motion.gif" alt="Animated loop: bull-mark-motion, the Bull mark in black and lime" loading="lazy">
+          <figcaption><b>bull-mark-motion</b>The mark again, black and lime. Cropped square from portrait.<br>reel-v7</figcaption>
         </figure>
         <figure>
           <img src="img/hero-bull-army.gif" alt="Animated loop: bull-army" loading="lazy">
@@ -970,27 +973,27 @@ cursor below it       (y≈670)  5 wheel ticks → ~470 px of page scroll</pre>
       <p class="fix" style="max-width:40rem"><b>Fix</b>Use <code>&lt;video autoplay muted loop playsinline preload="metadata" poster="…"&gt;</code> with the existing MP4s and a WebM fallback. Reserve GIF for the three that have no MP4 yet, or re-render those too. Always ship a poster frame so the hero has something at rest.</p>
       <div class="tablewrap">
         <table class="reeltable">
-          <thead><tr><th>Loop</th><th>Reel</th><th>Size</th><th>Frames</th><th>GIF weight</th><th>MP4 exists</th></tr></thead>
+          <thead><tr><th>Loop</th><th>Reel</th><th>Size</th><th>Frames</th><th>GIF weight</th><th>MP4 exists</th><th>Ground</th></tr></thead>
           <tbody>
-              <tr><td>new-buy-forward</td><td>reel-v10</td><td>480×480</td><td>72f</td><td>2.3 MB</td><td class="">—</td></tr>
-              <tr><td>animated</td><td>reel-v2</td><td>360×640</td><td>102f</td><td>2.8 MB</td><td class="">—</td></tr>
-              <tr><td>bull-dance</td><td>reel-v4</td><td>360×640</td><td>96f</td><td>6.6 MB</td><td class="">—</td></tr>
-              <tr><td>bull-boardroom</td><td>reel-v5</td><td>360×640</td><td>96f</td><td>10.8 MB</td><td class="">—</td></tr>
-              <tr><td>bull-boardroom-preview-v6</td><td>reel-v6</td><td>360×640</td><td>96f</td><td>10.6 MB</td><td class="on">yes</td></tr>
-              <tr><td>bull-mark-motion</td><td>reel-v7</td><td>360×640</td><td>96f</td><td>2.6 MB</td><td class="">—</td></tr>
-              <tr><td>new-buy-cash-walk</td><td>reel-v8</td><td>480×480</td><td>72f</td><td>4.9 MB</td><td class="">—</td></tr>
-              <tr><td>new-buy-true-walk</td><td>reel-v9</td><td>480×480</td><td>72f</td><td>3.7 MB</td><td class="">—</td></tr>
-              <tr><td>01-mark-loop</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>3.4 MB</td><td class="on">yes</td></tr>
-              <tr><td>02-body-loop</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>2.9 MB</td><td class="on">yes</td></tr>
-              <tr><td>03-forward-charge</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>6.2 MB</td><td class="on">yes</td></tr>
-              <tr><td>01-editorial-cuts</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>1.1 MB</td><td class="on">yes</td></tr>
-              <tr><td>02-spotlight</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>1.3 MB</td><td class="on">yes</td></tr>
-              <tr><td>03-logo-reveal</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>0.4 MB</td><td class="on">yes</td></tr>
-              <tr><td>04-bull-army</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>2.1 MB</td><td class="on">yes</td></tr>
-              <tr><td>01-roller-rink</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>4.3 MB</td><td class="on">yes</td></tr>
-              <tr><td>02-midnight-diner</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>3.6 MB</td><td class="on">yes</td></tr>
-              <tr><td>03-rooftop-boombox</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>3.2 MB</td><td class="on">yes</td></tr>
-              <tr><td>bull-two-step-v14</td><td>reel-x-v14</td><td>540×540</td><td>59f</td><td>1.3 MB</td><td class="on">yes</td></tr>
+              <tr><td>new-buy-forward</td><td>reel-v10</td><td>480×480</td><td>72f</td><td>2.3 MB</td><td class="">—</td><td class="clash">orange</td></tr>
+              <tr><td>animated</td><td>reel-v2</td><td>360×640</td><td>102f</td><td>2.8 MB</td><td class="">—</td><td>on palette</td></tr>
+              <tr><td>bull-dance</td><td>reel-v4</td><td>360×640</td><td>96f</td><td>6.6 MB</td><td class="">—</td><td>on palette</td></tr>
+              <tr><td>bull-boardroom</td><td>reel-v5</td><td>360×640</td><td>96f</td><td>10.8 MB</td><td class="">—</td><td>on palette</td></tr>
+              <tr><td>bull-boardroom-preview-v6</td><td>reel-v6</td><td>360×640</td><td>96f</td><td>10.6 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>bull-mark-motion</td><td>reel-v7</td><td>360×640</td><td>96f</td><td>2.6 MB</td><td class="">—</td><td>on palette</td></tr>
+              <tr><td>new-buy-cash-walk</td><td>reel-v8</td><td>480×480</td><td>72f</td><td>4.9 MB</td><td class="">—</td><td class="clash">orange</td></tr>
+              <tr><td>new-buy-true-walk</td><td>reel-v9</td><td>480×480</td><td>72f</td><td>3.7 MB</td><td class="">—</td><td class="clash">orange</td></tr>
+              <tr><td>01-mark-loop</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>3.4 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>02-body-loop</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>2.9 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>03-forward-charge</td><td>reel-x-v11</td><td>540×540</td><td>75f</td><td>6.2 MB</td><td class="on">yes</td><td class="clash">brown</td></tr>
+              <tr><td>01-editorial-cuts</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>1.1 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>02-spotlight</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>1.3 MB</td><td class="on">yes</td><td class="clash">navy</td></tr>
+              <tr><td>03-logo-reveal</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>0.4 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>04-bull-army</td><td>reel-x-v12</td><td>540×540</td><td>48f</td><td>2.1 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>01-roller-rink</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>4.3 MB</td><td class="on">yes</td><td class="clash">purple</td></tr>
+              <tr><td>02-midnight-diner</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>3.6 MB</td><td class="on">yes</td><td>on palette</td></tr>
+              <tr><td>03-rooftop-boombox</td><td>reel-x-v13</td><td>540×540</td><td>48f</td><td>3.2 MB</td><td class="on">yes</td><td class="clash">purple</td></tr>
+              <tr><td>bull-two-step-v14</td><td>reel-x-v14</td><td>540×540</td><td>59f</td><td>1.3 MB</td><td class="on">yes</td><td class="clash">navy</td></tr>
           </tbody>
         </table>
       </div>
